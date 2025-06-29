@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InfluencerHub - Premium Social Influencer Search</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">Sociomaze</div>
+        <div class="nav-buttons">
+            <div id="creditsDisplay" class="credits-display hidden">Credits: <span id="creditsCount">0</span></div>
+            <div id="authButtons">
+                <button class="btn btn-secondary" onclick="showModal('loginModal')">Login</button>
+                <button class="btn btn-primary" onclick="showModal('signupModal')">Sign Up</button>
+            </div>
+            <div id="userButtons" class="hidden">
+                <button class="btn btn-primary" onclick="showModal('paymentModal')">Buy Credits</button>
+                <button class="btn btn-danger" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>Find Perfect Influencers</h1>
+            <p>Discover and connect with top social media influencers across all platforms</p>
+        </div>
+
+        <!-- Trial Info -->
+        <div id="trialInfo" class="trial-info">
+            🎉 Free Trial: 5 searches remaining! Sign up to track your usage and buy more credits.
+        </div>
+
+        <!-- Search Section -->
+        <div class="search-section">
+            <h2 style="margin-bottom: 1rem; color: #333;">Search Influencers</h2>
+            <form class="search-form" onsubmit="searchInfluencers(event)">
+                <input type="text" id="searchInput" class="search-input" placeholder="Enter niche, keyword, or influencer name..." required>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-search"></i> Search
+                </button>
+            </form>
+
+            <!-- Alert Messages -->
+            <div id="alertContainer"></div>
+
+            <!-- Search Results -->
+            <div id="searchResults" class="results-grid"></div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('loginModal')">&times;</button>
+            <h2>Login to Your Account</h2>
+            <form onsubmit="login(event)">
+                <div class="form-group">
+                    <label for="loginEmail">Email:</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password:</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+            </form>
+            <p style="text-align: center; margin-top: 1rem;">
+                Don't have an account? <a href="#" onclick="closeModal('loginModal'); showModal('signupModal');">Sign Up</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('signupModal')">&times;</button>
+            <h2>Create Your Account</h2>
+            <form onsubmit="signup(event)">
+                <div class="form-group">
+                    <label for="signupName">Full Name:</label>
+                    <input type="text" id="signupName" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email:</label>
+                    <input type="email" id="signupEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password:</label>
+                    <input type="password" id="signupPassword" required minlength="6">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Sign Up</button>
+            </form>
+            <p style="text-align: center; margin-top: 1rem;">
+                Already have an account? <a href="#" onclick="closeModal('signupModal'); showModal('loginModal');">Login</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('paymentModal')">&times;</button>
+            <div class="pricing-card">
+                <h2>Buy More Credits</h2>
+                <div class="price">₹299</div>
+                <p style="color: #666; margin-bottom: 1rem;">Monthly Credits Package</p>
+                <ul class="features">
+                    <li>100 Premium Searches</li>
+                    <li>Advanced Filters</li>
+                    <li>Export to CSV</li>
+                    <li>Priority Support</li>
+                    <li>Valid for 30 days</li>
+                </ul>
+                <button class="btn btn-primary" onclick="initiatePayment()" style="width: 100%; padding: 1rem;">
+                    <i class="fas fa-credit-card"></i> Pay with Razorpay
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
